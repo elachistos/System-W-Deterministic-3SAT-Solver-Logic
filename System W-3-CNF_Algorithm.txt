@@ -49,7 +49,7 @@ In the most naive version of the saturation, for each pair (ψ₁, ψ₂) you ch
 
 In a (more) optimal version, the saturation avoids re-evaluating arbitrary sentences in W and only evaluates propositions that are pairwise entailed by the pair (ψ₁, ψ₂). That gives O(1) checks per pair, so the total runtime is O(n⁸).
 
-Satisfiability and un-satisfiability may be realized earlier than the final step k and thus the procedure can terminate. 
+Satisfiability and un-satisfiability may be realized much earlier than the final step k and thus the procedure can terminate. 
 
 A satisfying assignment can be realized by inspecting the original formula alongside the current set of derived sentences, selecting truth values for literals that do not immediately produce a contradiction. This allows the procedure to terminate once a consistent assignment is found, without requiring full saturation to reach step Γₖ.
 
