@@ -3,5 +3,5 @@ The procedure can be integrated with CDCL-style solvers by treating System W sat
 
 In general, any algorithm that employs System W essentially operates within a syntactically constrained formal system whose language is bounded, and whose outcomes are determined through pairwise saturation in polynomial time.
 
-A potential extension further restricts the system to a language with just three types of sentences: a single implication (A → B), a stand-alone literal (A), and a contradiction (⊥). The procedure remains the same, but when encoding a 3-SAT formula, additional variables must be introduced to represent the problem’s constraints. In this setup, the best-case bound is estimated to be O(n²).
+A potential extension further restricts the system to a language with just three types of sentences: a single implication (A → B), a stand-alone literal (A), and a contradiction (⊥). The procedure remains the same, but when encoding a 3-SAT formula, additional variables must be introduced to represent the problem’s constraints. In this setup, the best-case bound is estimated to be O(n⁴).
 
