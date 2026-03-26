@@ -1,0 +1,95 @@
+System W.
+
+For each variable A, the literals are A and ¬A. The complement operation satisfies Aᶜ = ¬A and ¬Aᶜ = A.
+
+Grammar.
+
+1. If A and B are literals, then (A ∧ B) is a sentence of W.
+2. If A, B, C, and D are literals, then (A ∧ B) → (C ∧ D) is a sentence of W.
+3. ⊥ is a sentence of W.
+4. Nothing else is a sentence of W.
+
+Given n variables, there are 2n literals, and 2n · 2n = 4n² ordered pairs. Thus 4n² conjunctions, 4n² · 4n² = 16n⁴  implications, and one ⊥, so the total language size is 16n⁴ + 4n² + 1.
+
+For unordered pairs with repetition, there are (2n(2n+1))/2 = 2n² + n pairs. Thus 2n² + n conjunctions, (2n² + n) · (2n² + n) = n²(2n+1)² implications, and one ⊥, so the total language size is n²(2n+1)² + (2n² + n) + 1 = 4n⁴ + 4n³ + 3n² + n + 1.
+
+There are then O(n⁴) number of possible sentences in W, where n is the number of variables.
+
+Derivations.
+
+Let Γ₀, Γ₁, …, Γₖ be a finite sequence of finite sets of sentences of W such that Γ₀ ⊆ Γ₁ ⊆ … ⊆ Γₖ. Let Γ₀ be the set of initial assumptions. Let Γ be the union of all sets in the sequence: Γ = Γ₀ ∪ Γ₁ ∪ … ∪ Γₖ. Since the sequence is monotonically increasing, the union is identical with the final set, so Γ = Γₖ.
+
+A sentence φ is jointly entailed by a set of sentences Γ iff Γ ⊨ φ.
+
+If Γ is empty, then for any sentence φ, Γ ⊨ φ iff there is no valuation v such that v(φ) = False.
+
+If Γ is non-empty, then Γ ⊨ φ iff there is no valuation v such that v(φ) = False and v( ψₐ, ψᵦ, ... , ψₖ ∈ Γₙ) = True. 
+
+Consider an arbitrary set Γₙ in the sequence.
+
+A sentence φ is pairwise entailed by Γₙ iff Γₙ ⊨ₙ φ.
+
+If Γₙ is empty, then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False.
+
+Now assume Γₙ is non-empty. Consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False.
+
+Let Newₙ be exactly the set of all sentences φ that are determined, during step n, to be pairwise entailed by Γₙ. The next set in the sequence is then Γₙ₊₁ = Γₙ ∪ Newₙ.
+
+At the final step Γₖ, every ordered pair of sentences (ψ₁, ψ₂) in the union Γ₀ ∪ … ∪ Γₙ ∪ … ∪ Γₖ has already been evaluated in some earlier step, so no pairs remain to be evaluated. Thus, Γₖ is saturated with respect to pairwise entailment.
+
+We calculate the length of this saturation. Each ordered pair (ψ₁, ψ₂) involves at most 8 variables, so evaluating any pairwise entailment over the pair requires checking at most 2⁸ = 256 assignments, which is constant time. There are at most O(n⁴) sentences in W, so the number of ordered pairs is O(n⁴) × O(n⁴) = O(n⁸). By construction, no ordered pair is evaluated more than once over the entire saturation.
+
+In the most naive version of the saturation, for each pair (ψ₁, ψ₂) you check every possible sentence φ ∈ W. That gives O(n⁴) checks per pair, so the total runtime is O(n⁸) · O(n⁴) = O(n¹²).
+
+In a (more) optimal version, the saturation avoids re-evaluating arbitrary sentences in W and only evaluates propositions that are pairwise entailed by the pair (ψ₁, ψ₂). That gives O(1) checks per pair, so the total runtime is O(n⁸).
+
+Theorems.
+
+We want to show that if Γₙ ⊨ₙ φ then Γₙ ⊨ φ. That is, if φ is pairwise entailed by Γₙ then φ is jointly entailed by Γₙ.
+
+Suppose Γₙ is empty. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False. But for any sentence φ, Γₙ ⊨ φ iff there is no valuation v such that v(φ) = False. This are equivalent. Therefore it follows that if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
+
+Suppose Γₙ is non-empty. Then Γₙ ⊨ₙ φ holds when there exists an ordered pair (ψ₁, ψ₂) from Γₙ, not previously evaluated, such that there is no valuation v with v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False. Since any valuation that makes every sentence in Γₙ true must make ψ₁ and ψ₂ true, the absence of such a valuation ensures that there is no valuation v assigning True to all of Γₙ while assigning False to φ. Therefore Γₙ ⊨ φ, and hence if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
+
+Therefore if Γₙ ⊨ₙ φ then Γₙ ⊨ φ.
+
+Lastly, we want to show that if Γₖ ⊨ φ then Γₖ ⊨ₙ φ. That is, if φ is jointly entailed by the final set Γₖ then φ is pairwise entailed by Γₖ.
+
+Assume Γₖ ⊨ φ. Then there exists a finite subset {ψ₁, …, ψₘ} ⊆ Γₖ such that {ψ₁, …, ψₘ} ⊨ φ. By monotonicity, every previously present sentence, and every generated sentence all persist through the sequence, and by the construction of the next set, all of them continue pairing with everything else. The iteration has thus evaluated every pair from {ψ₁,…,ψₘ} and their consequences, accumulating all pairwise semantic consequences in Γₖ.
+
+Every sentence in W is either a conjunction or an implication, so it constrains a valuation only through pairs of literals. 
+
+Consider the conjunction (A ∧ B). This requires both literals to be true. Thus is falsified when either are false; when either Aᶜ or Bᶜ occur in some conjunction.
+
+Now consider an implication (A ∧ B) → (C ∧ D). Suppose A and B were true. Then  Γₖ ∈ (C ∧ D). Now, this is falsified when either are false, when either Cᶜ or Dᶜ occur in some conjunction. The conjunction is true unless both A and B are true while at least one of C or D is false, although falsity is expressed expressed mediately through the generated pair. In either case, truth and falsity depend only on the truth values of pairs of literals, and never on larger sets. Hence any failure of φ would already be witnessed by some pair among {ψ₁,…,ψₘ} or their consequences, so no higher-arity obstruction can escape pairwise detection.
+
+Hence saturation ensures that all such joint entailments have already been incorporated into Γₖ. If φ were not a pairwise consequence, the process would still be able to generate φ or intermediate sentences leading to φ, contradicting the assumption that Γₖ is saturated. Therefore, φ must already be a pairwise consequence of Γₖ, so Γₖ ⊨ₙ φ.
+
+Therefore, φ must already be a pairwise consequence of Γₖ, so Γₖ ⊨ₙ φ.
+
+Therefore if Γₖ ⊨ φ then Γₖ ⊨ₙ φ.
+
+Encoding.
+
+For a given 3-CNF Formula:
+
+For each 3-literal clause (A ∨ B ∨ C) assume the following true:
+
+(Bᶜ ∧ Cᶜ) → (A ∧ A)
+(Aᶜ ∧ Cᶜ) → (B ∧ B)
+(Aᶜ ∧ Bᶜ) → (C ∧ C)
+
+For each 2-literal clause (A ∨ B) assume the following true:
+
+(Aᶜ ∧ Aᶜ) → (B ∧ B)
+(Bᶜ ∧ Bᶜ) → (A ∧ A)
+
+For each 1-literal clause (A) assume the following true:
+
+(A ∧ A)
+
+Therefore, because the translation preserves logical equivalence and the system W is sound and complete, a 3-CNF Formula is unsatisfiable iff Γₖ ⊨ₙ ⊥.
+
+Therefore the algorithm is simple: Receiving a Boolean formula and encode it. Run the above procedure and determining unsatisfiability upon deriving a contradiction.
+
+
