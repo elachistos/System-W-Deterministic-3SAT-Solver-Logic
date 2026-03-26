@@ -25,7 +25,7 @@ A sentence φ is jointly entailed by a set of sentences Γ iff Γ ⊨ φ.
 
 If Γ is empty, then for any sentence φ, Γ ⊨ φ iff there is no valuation v such that v(φ) = False.
 
-If Γ is non-empty, then Γ ⊨ φ iff there is no valuation v such that v(φ) = False and v(ψ) = True (non-vacuously) for all ψ ∈ Γₙ. 
+If Γ is non-empty, then Γ ⊨ φ iff there is no valuation v such that v(φ) = False and v(ψ) = True for all ψ ∈ Γₙ. 
 
 Consider an arbitrary set Γₙ in the sequence.
 
