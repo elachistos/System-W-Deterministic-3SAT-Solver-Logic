@@ -17,13 +17,15 @@ There are then O(n⁴) number of possible sentences in W, where n is the number 
 
 Derivations.
 
+**Derivations.**
+
 Let Γ₀, Γ₁, …, Γₖ be a finite sequence of finite sets of sentences of W such that Γ₀ ⊆ Γ₁ ⊆ … ⊆ Γₖ. Let Γ₀ be the set of initial assumptions. Let Γ be the union of all sets in the sequence: Γ = Γ₀ ∪ Γ₁ ∪ … ∪ Γₖ. Since the sequence is monotonically increasing, the union is identical with the final set, so Γ = Γₖ.
 
 A sentence φ is jointly entailed by a set of sentences Γ iff Γ ⊨ φ.
 
 If Γ is empty, then for any sentence φ, Γ ⊨ φ iff there is no valuation v such that v(φ) = False.
 
-If Γ is non-empty, then Γ ⊨ φ iff there is no valuation v such that v(φ) = False and v( ψₐ, ψᵦ, ... , ψₖ ∈ Γₙ) = True. 
+If Γ is non-empty, then Γ ⊨ φ iff there is no valuation v such that v(φ) = False and v(ψ) = True for all ψ ∈ Γₙ. 
 
 Consider an arbitrary set Γₙ in the sequence.
 
@@ -31,7 +33,11 @@ A sentence φ is pairwise entailed by Γₙ iff Γₙ ⊨ₙ φ.
 
 If Γₙ is empty, then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False.
 
-Now assume Γₙ is non-empty. Consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False.
+Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that no valuation makes ψ₁ and ψ₂ true while making φ false.
+
+An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False.
+
+This process may equivalently be realized through a CDCL-style procedure with unit propagation, where ordered-pairs are incrementally evaluated rather than exhausted at each step.
 
 Let Newₙ be exactly the set of all sentences φ that are determined, during step n, to be pairwise entailed by Γₙ. The next set in the sequence is then Γₙ₊₁ = Γₙ ∪ Newₙ.
 
