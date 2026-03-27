@@ -1,0 +1,188 @@
+_______________________________
+_______________________________
+
+PHP⁴₃.
+_______________________________
+_______________________________
+
+P₁H₁ ∨ P₁H₂ ∨ P₁H₃
+P₂H₁ ∨ P₂H₂ ∨ P₂H₃
+P₃H₁ ∨ P₃H₂ ∨ P₃H₃
+P₄H₁ ∨ P₄H₂ ∨ P₄H₃
+
+¬P₁H₁ ∨ ¬P₂H₁
+¬P₁H₁ ∨ ¬P₃H₁
+¬P₁H₁ ∨ ¬P₄H₁
+¬P₂H₁ ∨ ¬P₃H₁
+¬P₂H₁ ∨ ¬P₄H₁
+¬P₃H₁ ∨ ¬P₄H₁
+
+¬P₁H₂ ∨ ¬P₂H₂
+¬P₁H₂ ∨ ¬P₃H₂
+¬P₁H₂ ∨ ¬P₄H₂
+¬P₂H₂ ∨ ¬P₃H₂
+¬P₂H₂ ∨ ¬P₄H₂
+¬P₃H₂ ∨ ¬P₄H₂
+
+¬P₁H₃ ∨ ¬P₂H₃
+¬P₁H₃ ∨ ¬P₃H₃
+¬P₁H₃ ∨ ¬P₄H₃
+¬P₂H₃ ∨ ¬P₃H₃
+¬P₂H₃ ∨ ¬P₄H₃
+¬P₃H₃ ∨ ¬P₄H₃
+_______________________________
+_______________________________
+
+(¬P₁H₂ ∧ ¬P₁H₃) → (P₁H₁ ∧ P₁H₁)
+(¬P₁H₁ ∧ ¬P₁H₃) → (P₁H₂ ∧ P₁H₂)
+(¬P₁H₁ ∧ ¬P₁H₂) → (P₁H₃ ∧ P₁H₃)
+
+(¬P₂H₂ ∧ ¬P₂H₃) → (P₂H₁ ∧ P₂H₁)
+(¬P₂H₁ ∧ ¬P₂H₃) → (P₂H₂ ∧ P₂H₂)
+(¬P₂H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃)
+
+(¬P₃H₂ ∧ ¬P₃H₃) → (P₃H₁ ∧ P₃H₁)
+(¬P₃H₁ ∧ ¬P₃H₃) → (P₃H₂ ∧ P₃H₂)
+(¬P₃H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃)
+
+(¬P₄H₂ ∧ ¬P₄H₃) → (P₄H₁ ∧ P₄H₁)
+(¬P₄H₁ ∧ ¬P₄H₃) → (P₄H₂ ∧ P₄H₂)
+(¬P₄H₁ ∧ ¬P₄H₂) → (P₄H₃ ∧ P₄H₃)
+_______________________________
+_______________________________
+
+(P₁H₁ ∧ P₁H₁) → (¬P₂H₁ ∧ ¬P₂H₁)
+(P₂H₁ ∧ P₂H₁) → (¬P₁H₁ ∧ ¬P₁H₁)
+
+(P₁H₁ ∧ P₁H₁) → (¬P₃H₁ ∧ ¬P₃H₁)
+(P₃H₁ ∧ P₃H₁) → (¬P₁H₁ ∧ ¬P₁H₁)
+
+(P₁H₁ ∧ P₁H₁) → (¬P₄H₁ ∧ ¬P₄H₁)
+(P₄H₁ ∧ P₄H₁) → (¬P₁H₁ ∧ ¬P₁H₁)
+
+(P₂H₁ ∧ P₂H₁) → (¬P₃H₁ ∧ ¬P₃H₁)
+(P₃H₁ ∧ P₃H₁) → (¬P₂H₁ ∧ ¬P₂H₁)
+
+(P₂H₁ ∧ P₂H₁) → (¬P₄H₁ ∧ ¬P₄H₁)
+(P₄H₁ ∧ P₄H₁) → (¬P₂H₁ ∧ ¬P₂H₁)
+
+(P₃H₁ ∧ P₃H₁) → (¬P₄H₁ ∧ ¬P₄H₁)
+(P₄H₁ ∧ P₄H₁) → (¬P₃H₁ ∧ ¬P₃H₁)
+_______________________________
+_______________________________
+
+(P₁H₂ ∧ P₁H₂) → (¬P₂H₂ ∧ ¬P₂H₂)
+(P₂H₂ ∧ P₂H₂) → (¬P₁H₂ ∧ ¬P₁H₂)
+
+(P₁H₂ ∧ P₁H₂) → (¬P₃H₂ ∧ ¬P₃H₂)
+(P₃H₂ ∧ P₃H₂) → (¬P₁H₂ ∧ ¬P₁H₂)
+
+(P₁H₂ ∧ P₁H₂) → (¬P₄H₂ ∧ ¬P₄H₂)
+(P₄H₂ ∧ P₄H₂) → (¬P₁H₂ ∧ ¬P₁H₂)
+
+(P₂H₂ ∧ P₂H₂) → (¬P₃H₂ ∧ ¬P₃H₂)
+(P₃H₂ ∧ P₃H₂) → (¬P₂H₂ ∧ ¬P₂H₂)
+
+(P₂H₂ ∧ P₂H₂) → (¬P₄H₂ ∧ ¬P₄H₂)
+(P₄H₂ ∧ P₄H₂) → (¬P₂H₂ ∧ ¬P₂H₂)
+
+(P₃H₂ ∧ P₃H₂) → (¬P₄H₂ ∧ ¬P₄H₂)
+(P₄H₂ ∧ P₄H₂) → (¬P₃H₂ ∧ ¬P₃H₂)
+_______________________________
+_______________________________
+
+(P₁H₃ ∧ P₁H₃) → (¬P₂H₃ ∧ ¬P₂H₃)
+(P₂H₃ ∧ P₂H₃) → (¬P₁H₃ ∧ ¬P₁H₃)
+
+(P₁H₃ ∧ P₁H₃) → (¬P₃H₃ ∧ ¬P₃H₃)
+(P₃H₃ ∧ P₃H₃) → (¬P₁H₃ ∧ ¬P₁H₃)
+
+(P₁H₃ ∧ P₁H₃) → (¬P₄H₃ ∧ ¬P₄H₃)
+(P₄H₃ ∧ P₄H₃) → (¬P₁H₃ ∧ ¬P₁H₃)
+
+(P₂H₃ ∧ P₂H₃) → (¬P₃H₃ ∧ ¬P₃H₃)
+(P₃H₃ ∧ P₃H₃) → (¬P₂H₃ ∧ ¬P₂H₃)
+
+(P₂H₃ ∧ P₂H₃) → (¬P₄H₃ ∧ ¬P₄H₃)
+(P₄H₃ ∧ P₄H₃) → (¬P₂H₃ ∧ ¬P₂H₃)
+
+(P₃H₃ ∧ P₃H₃) → (¬P₄H₃ ∧ ¬P₄H₃)
+(P₄H₃ ∧ P₄H₃) → (¬P₃H₃ ∧ ¬P₃H₃)
+_______________________________
+_______________________________
+
+To verify any deduction made hereafter, evaluate the truth table where the pair of propositions are non-vacuously true. A proposition in W is derived iff it cannot be false when the considered pair of propositions are non-vacuously true. (Please note the usage of an inference rule in propositional logic serves only as a method for verifying the semantic entailment, not as part of the underlying semantics of W.)
+
+https://web.stanford.edu/class/cs103/tools/truth-table-tool/
+
+-------------------------------
+-------------------------------
+
+(P₁H₁ ∧ P₁H₁) → (¬P₂H₁ ∧ ¬P₂H₁) Hypo.
+(¬P₂H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃) Hypo.
+_______________________________
+
+(P₁H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃)  \\ (((A and A) -> (not B and not B)) and ((not B and not C) -> (D and D))) -> ((A and not C) -> (D and D))
+(P₂H₃ ∧ P₂H₃) → (¬P₃H₃ ∧ ¬P₃H₃) Hypo.
+_______________________________
+
+(P₁H₁ ∧ ¬P₂H₂) → (¬P₃H₃ ∧ ¬P₃H₃) \\ Hypothetical syllogism.
+
+-------------------------------
+
+(P₂H₂ ∧ P₂H₂) → (¬P₁H₂ ∧ ¬P₁H₂) Hypo.
+(¬P₁H₁ ∧ ¬P₁H₂) → (P₁H₃ ∧ P₁H₃) Hypo.
+_______________________________
+
+(¬P₁H₁ ∧ P₂H₂) → (P₁H₃ ∧ P₁H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) -> ((A and not C) -> (D and D))
+(P₁H₃ ∧ P₁H₃) → (¬P₃H₃ ∧ ¬P₃H₃) Hypo.
+________________________________
+
+(¬P₁H₁ ∧ P₂H₂) → (¬P₃H₃ ∧ ¬P₃H₃) \\ Hypothetical syllogism.
+(P₁H₁ ∧ ¬P₂H₂) → (¬P₃H₃ ∧ ¬P₃H₃) Reit.
+________________________________
+
+(¬P₃H₃ ∧ ¬P₃H₃) \\ Or Elimination.
+
+--------------------------------
+--------------------------------
+
+--------------------------------
+--------------------------------
+
+(P₁H₁ ∧ P₁H₁) → (¬P₃H₁ ∧ ¬P₃H₁) Hypo.
+(¬P₃H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) Hypo.
+________________________________
+
+(P₁H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) -> ((A and not C) -> (D and D))
+
+--------------------------------
+
+(P₂H₂ ∧ P₂H₂) → (¬P₃H₂ ∧ ¬P₃H₂) Hypo.
+(¬P₃H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) Hypo.
+________________________________
+
+(P₂H₂ ∧ P₂H₂) → (¬P₃H₁ ∧ ¬P₃H₂) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) -> ((A and not C) -> (D and D))
+(P₂H₂ ∧ P₂H₂) → (¬P₃H₁ ∧ ¬P₃H₂) Reit.
+_________________________________
+
+(¬P₁H₁ ∧ P₂H₂) → (P₃H₃ ∧ P₃H₃) \\ Strengthening the Antecedent.
+(P₁H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) Reit.
+________________________________
+
+(P₃H₃ ∧ P₃H₃) \\ Or Elimination.
+(¬P₃H₃ ∧ ¬P₃H₃) Reit.
+________________________________
+
+⊥ \\ Negation Elimination.
+
+-------------------------------
+-------------------------------
+
+
+
+
+
+
+
+
