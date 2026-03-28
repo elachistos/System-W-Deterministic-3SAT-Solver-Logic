@@ -40,7 +40,7 @@ If Γₙ is empty, then for any sentence φ, Γₙ ⊨ₙ φ iff there is no val
 
 Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that there is no valuation while φ false.*
 
-You may implement it differently. We no longer consider a pair, but a step Γₙ such that Γw ⊨ φ iff there is no valuation v such that v(φ) = False and v(ψ) = True for all ψ ∈ Γₙ. Hence it seems each step is a "wave" of stores.
+You may implement it differently. We no longer consider a pair, but a step Γₙ such that Γₙ ⊨w φ iff there is no valuation v such that v(φ) = False and v(ψ) = True for all ψ ∈ Γₙ. Hence it seems each step is a "wave" of stores. I could not immediately find a cool name to name it. So "wave entailment" will suffice.
 
 An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True and v(φ) = False.
 
