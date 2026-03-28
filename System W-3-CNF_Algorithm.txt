@@ -38,9 +38,9 @@ A sentence φ is pairwise entailed by Γₙ iff Γₙ ⊨ₙ φ.
 
 If Γₙ is empty, then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False.
 
-Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that there is no valuation where ψ₁ and ψ₂ are true and at least one sentence in the pair is non-vacuously true while φ false.
+Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that there is no valuation while φ false.
 
-An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True and at least one sentence is true non-vacuously, and v(φ) = False.
+An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True and v(φ) = False.
 
 This process may equivalently be realized through a CDCL-style procedure with unit propagation, where ordered-pairs are incrementally evaluated rather than exhausted at each step.
 
@@ -68,27 +68,15 @@ We want to show that if Γₙ ⊨ₙ φ then Γₙ ⊨ φ. That is, if φ is pai
 
 Suppose Γₙ is empty. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False. But for any sentence φ, Γₙ ⊨ φ iff there is no valuation v such that v(φ) = False. This are equivalent. Therefore it follows that if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
 
-Suppose Γₙ is non-empty. Then Γₙ ⊨ₙ φ holds when there exists an ordered pair (ψ₁, ψ₂) from Γₙ, not previously evaluated, such that there is no valuation v with v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False (where atleast one of ψ₁ or ψ₂ are non-vacuously true). Since any valuation that makes every sentence in Γₙ true must make ψ₁ and ψ₂ true, the absence of such a valuation ensures that there is no valuation v assigning True to all of Γₙ while assigning False to φ. Therefore Γₙ ⊨ φ, and hence if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
+Suppose Γₙ is non-empty. Then Γₙ ⊨ₙ φ holds when there exists an ordered pair (ψ₁, ψ₂) from Γₙ, not previously evaluated, such that there is no valuation v with v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False. Since any valuation that makes every sentence in Γₙ true must make ψ₁ and ψ₂ true, the absence of such a valuation ensures that there is no valuation v assigning True to all of Γₙ while assigning False to φ. Therefore Γₙ ⊨ φ, and hence if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
 
 Therefore if Γₙ ⊨ₙ φ then Γₙ ⊨ φ.
 
 Lastly, we want to show that if Γₖ ⊨ φ then Γₖ ⊨ₙ φ. That is, if φ is jointly entailed by the final set Γₖ then φ is pairwise entailed by Γₖ.
 
-Assume Γₖ ⊨ φ. Then there exists a finite subset {ψ₁, …, ψₘ} ⊆ Γₖ such that {ψ₁, …, ψₘ} ⊨ φ. By monotonicity, every previously present sentence, and every generated sentence all persist through the sequence, and by the construction of the next set, all of them continue pairing with everything else. The iteration has thus evaluated every pair from {ψ₁,…,ψₘ} and their consequences, accumulating all pairwise semantic consequences in Γₖ.
-
-Every sentence in W (excluding ⊥) is either a conjunction or an implication, so it constrains a valuation only through pairs of literals.
-
-Consider the conjunction (A ∧ B). This requires both literals to be true. Thus is falsified when either are false; when either Aᶜ or Bᶜ occur in some conjunction.
-
-Now consider an implication (A ∧ B) → (C ∧ D). Suppose A and B were true. Then  Γₖ ∈ (C ∧ D). Now, this is falsified when either are false, when either Cᶜ or Dᶜ occur in some conjunction. The conjunction is true unless both A and B are true while at least one of C or D is false, although falsity is expressed expressed mediately through the generated pair. In either case, truth and falsity depend only on the truth values of pairs of literals, and never on larger sets. Hence any failure of φ would already be witnessed by some pair among {ψ₁,…,ψₘ} or their consequences, so no higher-arity obstruction can escape pairwise detection.
-
-Hence saturation ensures that all such joint entailments have already been incorporated into Γₖ. If φ were not a pairwise consequence, the process would still be able to generate φ or intermediate sentences leading to φ, contradicting the assumption that Γₖ is saturated. Therefore, φ must already be a pairwise consequence of Γₖ, so Γₖ ⊨ₙ φ.
-
-Therefore, φ must already be a pairwise consequence of Γₖ, so Γₖ ⊨ₙ φ.
+Any derivation in propositional logic can be decomposed into a sequence of binary steps. Pairwise entailment is classical semantic entailment, but restricted to two premises at a time; hence represents on binary step. When saturation terminates all binary steps have been exhausted. And so, everything derivation has been completed, so too φ.
 
 Therefore if Γₖ ⊨ φ then Γₖ ⊨ₙ φ.
-
-Another sketch of completeness is demonstrated by the stimulation of any propositional logic derivation and how system W demonstrates pairwise entailment.
 
 Encoding.
 
