@@ -15,9 +15,14 @@ For unordered pairs with repetition, there are (2n(2n+1))/2 = 2n² + n pairs. Th
 
 There are then O(n⁴) number of possible sentences in W, where n is the number of variables.
 
-Derivations.
+Semantics.
+A valuation v assigns each literal either True or False. For any literal A, v(A) = True iff v(Aᶜ) = False.
 
-**Derivations.**
+For any literal  A and B, (A and B) is True in v iff v(A) = True and v(B) = True.
+For any literal A, B, C, and D, (A and B) → (C and D) is True in v iff v(C) = True and v(D) = True or either v(A) = False or v(B) = False.
+The valuation of ⊥ is always False.
+
+Derivations.
 
 Let Γ₀, Γ₁, …, Γₖ be a finite sequence of finite sets of sentences of W such that Γ₀ ⊆ Γ₁ ⊆ … ⊆ Γₖ. Let Γ₀ be the set of initial assumptions. Let Γ be the union of all sets in the sequence: Γ = Γ₀ ∪ Γ₁ ∪ … ∪ Γₖ. Since the sequence is monotonically increasing, the union is identical with the final set, so Γ = Γₖ.
 
@@ -33,9 +38,9 @@ A sentence φ is pairwise entailed by Γₙ iff Γₙ ⊨ₙ φ.
 
 If Γₙ is empty, then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False.
 
-Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that no valuation makes ψ₁ and ψ₂ where both sentences in the pair is non-vacuously true while making φ false.
+Now assume Γₙ is non-empty. Then a sentence φ is pairwise entailed by Γₙ if there exists a pair (ψ₁, ψ₂) from Γₙ such that there is no valuation where ψ₁ and ψ₂ are true and at least one sentence in the pair is non-vacuously true while φ false.
 
-An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True and both are true non-vacuously, and v(φ) = False.
+An instance of the procedure proceeds as follows: consider every ordered pair of sentences (ψ₁, ψ₂) such that ψ₁, ψ₂ ∈ Γₙ and (ψ₁, ψ₂) has not been evaluated in any earlier step. For each such pair, determine which sentences φ are pairwise entailed. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(ψ₁) = True, v(ψ₂) = True and at least one sentence is true non-vacuously, and v(φ) = False.
 
 This process may equivalently be realized through a CDCL-style procedure with unit propagation, where ordered-pairs are incrementally evaluated rather than exhausted at each step.
 
@@ -43,17 +48,19 @@ Let Newₙ be exactly the set of all sentences φ that are determined, during st
 
 At the final step Γₖ, every ordered pair of sentences (ψ₁, ψ₂) in the union Γ₀ ∪ … ∪ Γₙ ∪ … ∪ Γₖ has already been evaluated in some earlier step, so no pairs remain to be evaluated. Thus, Γₖ is saturated with respect to pairwise entailment.
 
-We calculate the length of this saturation. Each ordered pair (ψ₁, ψ₂) involves at most 8 variables, so evaluating any pairwise entailment over the pair requires checking at most 2⁸ = 256 assignments, which is constant time. There are at most O(n⁴) sentences in W, so the number of ordered pairs is O(n⁴) × O(n⁴) = O(n⁸). By construction, no ordered pair is evaluated more than once over the entire saturation.
+We calculate the length of this saturation. Each ordered pair (ψ₁, ψ₂) involves at most 8 variables, and the proposition checked has at most 4 variables, so evaluating any pairwise entailment over the pair requires checking at most 2¹² = 4096 assignments, which is constant time. There are at most O(n⁴) sentences in W, so the number of ordered pairs is O(n⁴) · O(n⁴) = O(n⁸). By construction, no ordered pair is evaluated more than once over the entire saturation.
 
-In the most naive version of the saturation, for each pair (ψ₁, ψ₂) you check every possible sentence φ ∈ W. That gives O(n⁴) checks per pair, so the total runtime is O(n⁸) · O(n⁴) = O(n¹²).
+In the most naive version* of the saturation, for each pair (ψ₁, ψ₂) you check every possible sentence φ ∈ W. That gives O(n⁴) checks per pair, so the total runtime is O(n⁸) · O(n⁴) = O(n¹²).
 
 In a (more) optimal version, the saturation avoids re-evaluating arbitrary sentences in W and only evaluates propositions that are pairwise entailed by the pair (ψ₁, ψ₂). That gives O(1) checks per pair, so the total runtime is O(n⁸).
 
-Satisfiability and un-satisfiability may be realized much earlier than the final step k and thus the procedure can terminate. 
+Satisfiability and un-satisfiability may be realized earlier than the final step k and thus the procedure can terminate. 
 
 A satisfying assignment can be realized by inspecting the original formula alongside the current set of derived sentences, selecting truth values for literals that do not immediately produce a contradiction. This allows the procedure to terminate once a consistent assignment is found, without requiring full saturation to reach step Γₖ.
 
 In a similar fashion, un-satisfiability is realized by eventually proceeding a contradiction.
+
+*It could be worse.
 
 Theorems.
 
@@ -61,7 +68,7 @@ We want to show that if Γₙ ⊨ₙ φ then Γₙ ⊨ φ. That is, if φ is pai
 
 Suppose Γₙ is empty. Then for any sentence φ, Γₙ ⊨ₙ φ iff there is no valuation v such that v(φ) = False. But for any sentence φ, Γₙ ⊨ φ iff there is no valuation v such that v(φ) = False. This are equivalent. Therefore it follows that if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
 
-Suppose Γₙ is non-empty. Then Γₙ ⊨ₙ φ holds when there exists an ordered pair (ψ₁, ψ₂) from Γₙ, not previously evaluated, such that there is no valuation v with v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False. Since any valuation that makes every sentence in Γₙ true must make ψ₁ and ψ₂ true, the absence of such a valuation ensures that there is no valuation v assigning True to all of Γₙ while assigning False to φ. Therefore Γₙ ⊨ φ, and hence if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
+Suppose Γₙ is non-empty. Then Γₙ ⊨ₙ φ holds when there exists an ordered pair (ψ₁, ψ₂) from Γₙ, not previously evaluated, such that there is no valuation v with v(ψ₁) = True, v(ψ₂) = True, and v(φ) = False (where atleast one of ψ₁ or ψ₂ are non-vacuously true). Since any valuation that makes every sentence in Γₙ true must make ψ₁ and ψ₂ true, the absence of such a valuation ensures that there is no valuation v assigning True to all of Γₙ while assigning False to φ. Therefore Γₙ ⊨ φ, and hence if Γₙ ⊨ₙ φ, then Γₙ ⊨ φ.
 
 Therefore if Γₙ ⊨ₙ φ then Γₙ ⊨ φ.
 
@@ -69,7 +76,7 @@ Lastly, we want to show that if Γₖ ⊨ φ then Γₖ ⊨ₙ φ. That is, if �
 
 Assume Γₖ ⊨ φ. Then there exists a finite subset {ψ₁, …, ψₘ} ⊆ Γₖ such that {ψ₁, …, ψₘ} ⊨ φ. By monotonicity, every previously present sentence, and every generated sentence all persist through the sequence, and by the construction of the next set, all of them continue pairing with everything else. The iteration has thus evaluated every pair from {ψ₁,…,ψₘ} and their consequences, accumulating all pairwise semantic consequences in Γₖ.
 
-Every sentence in W is either a conjunction or an implication, so it constrains a valuation only through pairs of literals. 
+Every sentence in W (excluding ⊥) is either a conjunction or an implication, so it constrains a valuation only through pairs of literals.
 
 Consider the conjunction (A ∧ B). This requires both literals to be true. Thus is falsified when either are false; when either Aᶜ or Bᶜ occur in some conjunction.
 
@@ -80,6 +87,8 @@ Hence saturation ensures that all such joint entailments have already been incor
 Therefore, φ must already be a pairwise consequence of Γₖ, so Γₖ ⊨ₙ φ.
 
 Therefore if Γₖ ⊨ φ then Γₖ ⊨ₙ φ.
+
+Another sketch of completeness is demonstrated by the stimulation of any propositional logic derivation and how system W demonstrates pairwise entailment.
 
 Encoding.
 
@@ -101,7 +110,3 @@ For each 1-literal clause (A) assume the following true:
 (A ∧ A)
 
 Therefore, because the translation preserves logical equivalence and the system W is sound and complete, a 3-CNF Formula is unsatisfiable iff Γₖ ⊨ₙ ⊥.
-
-Therefore the algorithm is simple: Receiving a Boolean formula and encode it. Run the above procedure and determining unsatisfiability upon deriving a contradiction.
-
-
