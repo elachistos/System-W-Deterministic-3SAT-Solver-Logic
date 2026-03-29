@@ -111,7 +111,7 @@ _______________________________
 _______________________________
 _______________________________
 
-To verify any deduction made hereafter, evaluate the truth table where both are true and at least one of the propositions is non-vacuously true. A proposition in W is derived iff it cannot be false when at least one proposition in the considered pair of propositions is non-vacuously true and both are true. (Please note the usage of an inference rule in propositional logic serves only as a method for verifying the pairwise semantic entailment, not as part of the underlying semantics of W.)
+To verify any deduction made hereafter, evaluate the truth table where both preceding sentences are true. A proposition in W is derived iff it cannot be false when both of the considered propositions are true. (Please note the usage of an inference rule in propositional logic serves only as a method for verifying the semantic entailment, not as part of the underlying semantics of W.)
 
 https://web.stanford.edu/class/cs103/tools/truth-table-tool/
 
@@ -122,7 +122,7 @@ https://web.stanford.edu/class/cs103/tools/truth-table-tool/
 (¬P₂H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃) Hypo.
 _______________________________
 
-(P₁H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃)  \\ (((A and A) -> (not B and not B)) and ((not B and not C) -> (D and D))) -> ((A and not C) -> (D and D))
+(P₁H₁ ∧ ¬P₂H₂) → (P₂H₃ ∧ P₂H₃)  \\ (((A and A) -> (not B and not B)) and ((not B and not C) -> (D and D))) |= ((A and not C) -> (D and D))
 (P₂H₃ ∧ P₂H₃) → (¬P₃H₃ ∧ ¬P₃H₃) Hypo.
 _______________________________
 
@@ -135,7 +135,7 @@ _______________________________
 (¬P₁H₁ ∧ ¬P₁H₂) → (P₁H₃ ∧ P₁H₃) Hypo.
 _______________________________
 
-(¬P₁H₁ ∧ P₂H₂) → (P₁H₃ ∧ P₁H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) -> ((A and not C) -> (D and D))
+(¬P₁H₁ ∧ P₂H₂) → (P₁H₃ ∧ P₁H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) |= ((A and not C) -> (D and D))
 (P₁H₃ ∧ P₁H₃) → (¬P₃H₃ ∧ ¬P₃H₃) Hypo.
 ________________________________
 
@@ -155,7 +155,7 @@ ________________________________
 (¬P₃H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) Hypo.
 ________________________________
 
-(P₁H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) -> ((A and not C) -> (D and D))
+(P₁H₁ ∧ ¬P₃H₂) → (P₃H₃ ∧ P₃H₃) \\ (((A and A) -> (not B and not B)) and ((not C and not B) -> (D and D))) |= ((A and not C) -> (D and D))
 
 --------------------------------
 
@@ -163,7 +163,7 @@ ________________________________
 (P₂H₂ ∧ P₂H₂) → (¬P₃H₂ ∧ ¬P₃H₂) Hypo.
 ________________________________
 
-(P₂H₂ ∧ P₂H₂) → (¬P₃H₁ ∧ ¬P₃H₂) \\ (((A and A) -> (not B and not B)) and ((A and A) -> (not C and not C))) -> ((A and A) -> (not B and not C))
+(P₂H₂ ∧ P₂H₂) → (¬P₃H₁ ∧ ¬P₃H₂) \\ (((A and A) -> (not B and not B)) and ((A and A) -> (not C and not C))) |= ((A and A) |= (not B and not C))
 (P₂H₂ ∧ P₂H₂) → (¬P₃H₁ ∧ ¬P₃H₂) \\ Reit.
 ________________________________
 
