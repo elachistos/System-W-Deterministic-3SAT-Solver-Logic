@@ -1,6 +1,6 @@
 The procedure can be integrated with CDCL-style solvers by treating System W saturation as a theory oracle. Rather than encoding the entire formula at once, the solver samples a subset of the initial assumptions, runs saturation over that subset, and checks for ⊥. If no contradiction is found, additional assumptions are added and saturation continues from the current state, inheriting all previously derived sentences. This incremental approach mirrors CDCL's conflict-driven learning — each saturation step accumulates consequences that persist and constrain all future steps, allowing the procedure to generalize efficiently across large formula instances.
 
-In general, any algorithm that employs System W essentially operates within a syntactically constrained formal system whose language is bounded, and whose outcomes are determined through pairwise saturation in polynomial time.
+In general, any algorithm that employs System W essentially operates within a syntactically constrained formal system whose language is bounded, and whose outcomes are determined through saturation by determining entailment by checking a subset of sentences avaliable.
 
 A potential extension further restricts the system to a language with just three types of sentences: a single implication (A → B), a stand-alone literal (A), and a contradiction (⊥). The procedure remains the same, but when encoding a 3-SAT formula, additional variables must be introduced to represent the problem’s constraints. In this setup, the best-case bound is estimated to be O(n⁴).
 
