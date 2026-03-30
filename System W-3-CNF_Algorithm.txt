@@ -100,3 +100,9 @@ For each 1-literal clause (A) assume the following true:
 (A ∧ A)
 
 Therefore, because the translation preserves logical equivalence and the system W is sound and complete, a 3-CNF Formula is unsatisfiable iff Γₖ ⊨ₙ ⊥.
+
+
+
+
+
+*ternary needed to work. For disjunction elimination.
