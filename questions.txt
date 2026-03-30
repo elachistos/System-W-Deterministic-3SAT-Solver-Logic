@@ -1,0 +1,48 @@
+# Is the following procedure over a restricted propositional language complete and computable in polynomial time?
+
+The vocabulary of $W$ is specified as follows: a set of propositional variables, where each variable is a symbol which may be a number, a letter (uppercase or lowercase), a letter with a subscript, or any other atomic symbol; a set of connectives {$\land, \to$}; a set of parentheses {$(, )$}; and $\bot$.
+
+For each variable $A$, the literals are $A^+$ and $A^-$. The complement operation on literals is defined by $(A^+)^c = A^-$ and $(A^-)^c = A^+$. One may optionally write $A^+$ as $A$ and $A^-$ as $\neg A$.
+
+### Grammar:
+
+1. $\bot$ is a sentence of $W$.
+2. If $L_1$ and $L_2$ are literals, then $(L_1 \land L_2)$ is a sentence of $W$.
+3. If $L_1, L_2, L_3, L_4$ are literals, then $(L_1 \land L_2) \to (L_3 \land L_4)$ is a sentence of $W$.
+4. Nothing else is a sentence of $W$.
+
+### Semantics:
+
+An interpretation $\mathscr{I}$ of $W$ is an assignment to each literal exactly one truth value in {$\text{True}, \text{False}$}, such that for any literal $L$, $\mathscr{I}(L) = \text{True}$ iff $\mathscr{I}(L^c) = \text{False}$; and an assignment to each sentence of $W$ exactly one truth value in {$\text{True}, \text{False}$}, as set out below.
+
+$\mathscr{I}(\bot)$ is always False.
+
+$\mathscr{I}((L_1 \land L_2)) = \text{True}$ iff $\mathscr{I}(L_1) = \text{True}$ and $\mathscr{I}(L_2) = \text{True}$.
+
+$\mathscr{I}((L_1 \land L_2) \to (L_3 \land L_4)) = \text{True}$ iff $\mathscr{I}(L_3) = \text{True}$ and $\mathscr{I}(L_4) = \text{True}$, or either $\mathscr{I}(L_1) = \text{False}$ or $\mathscr{I}(L_2) = \text{False}$.
+
+A sentence $\varphi$ of $W$ is semantically entailed by a set of sentences $\Gamma$ of $W$, written $\Gamma \vDash \varphi$, iff there is no interpretation $\mathscr{I}$ such that $\mathscr{I}(\psi) = \text{True}$ for every $\psi \in \Gamma$ and $\mathscr{I}(\varphi) = \text{False}$. All further semantic notions are defined similarly to classical propositional logic.
+
+### Procedure:
+
+Let $\Gamma_0 \subseteq \Gamma_1 \subseteq \dots \subseteq \Gamma^*$ be a finite monotonically increasing sequence of sets of sentences of $W$, where $\Gamma_0$ is the set of initial assumptions and $\Gamma^*$ is the final set.
+
+Consider an arbitrary set $\Gamma_n$ in the sequence. Let $\Delta_n$ be any subset of $\Gamma_n$ of cardinality at most three. The procedure proceeds as follows: consider every $\Delta_n$ that has not been evaluated in any earlier step; determine all sentences $\varphi$ of $W$ semantically entailed by $\Delta_n$; and add each such $\varphi$ to $\Omega_n$. After every such $\Delta_n$ has been considered, let $\Gamma_{n+1} = \Gamma_n \cup \Omega_n$, and proceed to the next set in the sequence. This continues until every subset of cardinality at most three has been evaluated, or every sentence of $W$ has been derived, whichever occurs first.
+
+**Question 1. Is the procedure complete? That is, is the following true: if $\Gamma_0 \vDash \varphi$, where $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$?**
+
+I argue for completeness as follows. First, every semantic consequence of $\Gamma_0$ can be obtained through a finite sequence of steps in which each step uses at most three propositions $\psi_1, \psi_2, \psi_3$ to derive a set of propositions ${\chi_1, \chi_2, \dots}$ such that {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$. Second, for any sentences $\psi_1, \psi_2, \psi_3$ of $W$, and any interpretation $\mathscr{I}$, $\mathscr{I}(\psi_1) = \text{True}$, $\mathscr{I}(\psi_2) = \text{True}$, and $\mathscr{I}(\psi_3) = \text{True}$ iff for every sentence $\chi$ of $W$, if ${\psi_1, \psi_2, \psi_3$} $\vDash \chi$ then $\mathscr{I}(\chi) = \text{True}$.
+
+If $\Gamma_0 \vDash \varphi$, then by the completeness of propositional logic there is a finite proof of $\varphi$ from $\Gamma_0$; that is, $\Gamma_0 \vdash \varphi$. Any such proof can be arranged into a sequence of steps in which each step consists of at most three propositions $\psi_1, \psi_2, \psi_3$ and a set of propositions ${\chi_1, \chi_2, \dots}$ such that {$\psi_1, \psi_2, \psi_3$} $\vdash \chi_i$ for each $\chi_i$. Since propositional logic is also sound, each such step satisfies {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$. Thus every semantic consequence of $\Gamma_0$ can be obtained through a finite sequence of steps in which each step uses at most three propositions $\psi_1, \psi_2, \psi_3$ to derive a set of propositions ${\chi_1, \chi_2, \dots}$ where {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$.
+
+Let $\Sigma$ be the set of all sentences of $W$ and let $\Delta$ be an arbitrary subset of $\Sigma$ of cardinality at most three. Any sentence in $\Delta$ affects interpretations in exactly one of three ways: it either is always False, forces two literals to be True, or excludes assignments in which two literals are True while two others are False. All possible interpretations of $\Delta$ are given by a combination of the following: it may be always False, may fix at most four literals to be True, and may exclude assignments in which two literals are True while two others are False, with at most three of such exclusions. Observe that any such combination determines exactly the same interpretations as some set of sentences of the form $\bot$, $(L_1 \land L_2)$, or $(L_1 \land L_2) \to (L_3 \land L_4)$, and is therefore completely captured by a set of sentences of $W$. Hence, for any sentences $\psi_1, \psi_2, \psi_3$ of $W$ and any interpretation $\mathscr{I}$, $\mathscr{I}(\psi_1) = \text{True}$, $\mathscr{I}(\psi_2) = \text{True}$, and $\mathscr{I}(\psi_3) = \text{True}$ iff for every sentence $\chi$ of $W$, if ${\psi_1, \psi_2, \psi_3$} $\vDash \chi$ then $\mathscr{I}(\chi) = \text{True}$.
+
+Therefore, every semantic consequence of $\Gamma_0$ can be obtained through a finite sequence of steps in which each step takes at most three sentences $\psi_1, \psi_2, \psi_3$ of $W$ and yields a set of sentences ${\chi_1, \chi_2, \dots}$ of $W$ such that {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$. Since the procedure exhausts all such steps, if $\Gamma_0 \vDash \varphi$, where $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$.
+
+Is there anything I am missing? If so, may you provide a counterexample? That is, produce an explicit $\Gamma_0$ and a sentence $\varphi$ of $W$ such that $\Gamma_0 \vDash \varphi$ and $\varphi \notin \Gamma^*$.
+
+**Question 2. Does the procedure run in polynomial time?**
+
+Each set of sentences $\Delta$ contains at most three sentences, and together with any candidate conclusion $\varphi$, there are at most sixteen variables in total. Hence at most $2^{16}$ assignments are required to evaluate whether $\Delta \vDash \varphi$, which is constant time. The number of distinct sentences in $W$ is $\Theta(n^4)$, where $n$ is the number of variables, since each sentence is of bounded form involving at most four literals. Thus the number of such subsets $\Delta$ is $\Theta(n^{12})$. By construction, no $\Delta$ is evaluated more than once. In the naive implementation, for each $\Delta$ one checks every $\varphi \in W$, giving $\Theta(n^4)$ checks per $\Delta$. Therefore the total runtime is $\Theta(n^{12}) \cdot \Theta(n^4) = \Theta(n^{16})$.
+
+Is the above reasoning correct?
