@@ -41,7 +41,31 @@ If $\Gamma_0 \vDash \varphi$, then by the completeness of propositional logic th
 
 Let $\Sigma$ be the set of all sentences of $W$ and let $\Delta$ be an arbitrary subset of $\Sigma$ of cardinality at most three. Any sentence in $\Delta$ affects interpretations in exactly one of three ways: it either is always False, forces two literals to be True, or excludes assignments in which two literals are True while two others are False. All possible interpretations of $\Delta$ are given by a combination of the following: it may be always False, may fix at most six literals to be True, and may exclude assignments in which two literals are True while two others are False, with at most three of such exclusions. Observe that for every such combination, what follows from taking them together is completely expressed by some set of sentences of $W$ containing $\bot$, $(L_1 \land L_2)$, or $(L_1 \land L_2) \to (L_3 \land L_4)$. Hence, for any sentences $\psi_1, \psi_2, \psi_3$ of $W$, and any interpretation $\mathscr{I}$ such that $\mathscr{I}(\psi_1) = \text{True}$, $\mathscr{I}(\psi_2) = \text{True}$, and $\mathscr{I}(\psi_3) = \text{True}$, nothing that follows from taking $\psi_1, \psi_2, \psi_3$ together goes outside what can be written in $W$.
 
-Therefore, by Lemma 1, every semantic consequence of $\Gamma_0$ can be written as a finite sequence of steps in which each step takes at most three sentences $\psi_1, \psi_2, \psi_3$ of $W$ and yields a set of sentences ${\chi_1, \chi_2, \dots}$ of $W$ such that {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$. By Lemma 2, everything that arises at each step is completely expressible by sentences of $W$. Since the procedure considers every subset of at most three sentences in the sequence, all such steps are reproduced and every consequence is eventually generated. Hence, if $\Gamma_0 \vDash \varphi$ and $\varphi \in W$, then $\varphi \in \Gamma^*$.
+Therefore, by Lemma 1, every semantic consequence of $\Gamma_0$ can be written as a finite sequence of steps in which each step takes at most three sentences $\psi_1, \psi_2, \psi_3$ of $W$ and yields a set of sentences ${\chi_1, \chi_2, \dots}$ of $W$ such that {$\psi_1, \psi_2, \psi_3$} $\vDash \chi_i$ for each $\chi_i$. By Lemma 2, everything that arises at each step is completely expressible by sentences of $W$. Since the procedure considers every subset of at most three sentences in the sequence, all such steps are reproduced and every consequence is eventually generated. Hence, if $\Gamma_0 \vDash \varphi$ and $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$.
+
+Alternatively, I provide a second argument. For every $\varphi$, where $\varphi$ is a sentence of $W$, if $\Gamma_0 \vDash \varphi$, then there exists a natural deduction derivation of $\varphi$ from $\Gamma_0$, and each such derivation can be simulated entirely within $W$. Considering Lemma 1 in light of this, it follows that $\varphi \in \Gamma^*$.
+
+1. *Conjunction Introduction*. { $(L_1 \wedge L_2), (L_3 \wedge L_4)$ } $\vDash$ { $(L_1 \wedge L_3), (L_1 \wedge L_4), (L_2 \wedge L_3), (L_2 \wedge L_4)$ }.
+
+2. *Conjunction Elimination*. { $(L_1 \wedge L_2)$ } $\vDash$ { $(L_1 \wedge L_1)$ } and { $(L_1 \wedge L_2)$ } $\vDash$ { $(L_2 \wedge L_2)$ }.
+
+3. *Modus Ponens*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2)$ } $\vDash$ { $(L_3 \wedge L_4)$ }.
+
+4. *Modus Tollens*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1^c \wedge L_2^c)$ }.
+
+5. *Hypothetical Syllogism*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_3 \wedge L_4) \to (L_5 \wedge L_6)$ } $\vDash$ { $(L_1 \wedge L_2) \to (L_5 \wedge L_6)$ }.
+
+6. *Disjunction Introduction*. { $(L_1 \wedge L_2)$ } $\vDash$ { $(L_1^c \wedge L_2^c) \to (L_3 \wedge L_4)$ }.
+
+7. *Disjunction Elimination*. Since disjunctions are represented by implication, disjunction elimination reduces to applications of Modus Ponens or Modus Tollens.
+
+8. *Or Elimination*. { $(L_1^c \wedge L_1^c) \to (L_2 \wedge L_2), (L_1 \wedge L_1) \to (L_3 \wedge L_4), (L_2 \wedge L_2) \to (L_3 \wedge L_4)$ } $\vDash$ { $(L_3 \wedge L_4)$ }.
+
+9. *Bottom Elimination*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2) \to (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1 \wedge L_1) \to (L_2^c \wedge L_2^c), (L_2 \wedge L_2) \to (L_1^c \wedge L_1^c)$ } or { $(L_1^c \wedge L_2^c)$ }.
+
+10. *Negation Elimination*. { $(L_1 \wedge L_2), (L_1^c \wedge L_2^c)$ } $\vDash$ { $\bot$ }.
+
+Since the procedure guarantees to produce the semantic consequences of any set of sentences of $W$ that has at most three sentences in the sequence, if there is no interpretation where $(L_1 \wedge L_2)$ is true and $(L_3 \wedge L_4)$ is false, then $\vDash (L_1 \wedge L_2) \to (L_3 \wedge L_4)$. Hence any subproof can be simulated. By Lemma 1, every semantic consequence of $\Gamma_0$ can be obtained by a finite sequence of steps in which each step uses at most three sentences and, as enumerated above, each corresponding inference rules uses at most three sentences. Therefore if $\Gamma_0 \vDash \varphi$ and $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$.
 
 If the statement "if $\Gamma_0 \vDash \varphi$, where $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$" is not true, may you provide a counterexample? Please provide an explicit $\Gamma_0$ and an explicit sentence $\varphi$ of $W$ such that $\Gamma_0 \vDash \varphi$ and $\varphi \notin \Gamma^*$. If it is, but the reasoning above is flawed, please provide a sound argument for the completeness of the procedure.
 
