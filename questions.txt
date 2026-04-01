@@ -59,7 +59,7 @@ Alternatively, I provide a second argument. For every $\varphi$, where $\varphi$
 
 7. *Disjunction Elimination*. Since disjunctions are represented by implication, disjunction elimination reduces to applications of Modus Ponens or Modus Tollens.
 
-8. *Or Elimination*. { $(L_1^c \wedge L_1^c) \to (L_2 \wedge L_2), (L_1 \wedge L_1) \to (L_3 \wedge L_4), (L_2 \wedge L_2) \to (L_3 \wedge L_4)$ } $\vDash$ { $(L_3 \wedge L_4)$ }.
+8. *Or Elimination*. { $(L_1^c \wedge L_2^c) \to (L_3 \wedge L_4), (L_1 \wedge L_2) \to (L_5 \wedge L_6), (L_3 \wedge L_4) \to (L_5 \wedge L_6)$ } $\vDash$ { $(L_5 \wedge L_6)$ }.
 
 9. *Bottom Elimination*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2) \to (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1 \wedge L_1) \to (L_2^c \wedge L_2^c), (L_2 \wedge L_2) \to (L_1^c \wedge L_1^c)$ } and { $(L_1^c \wedge L_2^c)$ } iff $L_1 = L_2$.
 
