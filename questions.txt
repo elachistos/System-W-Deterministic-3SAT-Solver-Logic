@@ -51,7 +51,7 @@ Alternatively, I provide a second argument. For every $\varphi$, where $\varphi$
 
 3. *Modus Ponens*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2)$ } $\vDash$ { $(L_3 \wedge L_4)$ }.
 
-4. *Modus Tollens*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1^c \wedge L_2^c)$ }.
+4. *Modus Tollens*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1 \wedge L_1) \to (L_2^c \wedge L_2^c), (L_2 \wedge L_2) \to (L_1^c \wedge L_1^c)$ } and { $(L_1^c \wedge L_2^c)$ } iff $L_1 = L_2$.
 
 5. *Hypothetical Syllogism*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_3 \wedge L_4) \to (L_5 \wedge L_6)$ } $\vDash$ { $(L_1 \wedge L_2) \to (L_5 \wedge L_6)$ }.
 
@@ -61,9 +61,9 @@ Alternatively, I provide a second argument. For every $\varphi$, where $\varphi$
 
 8. *Or Elimination*. { $(L_1^c \wedge L_1^c) \to (L_2 \wedge L_2), (L_1 \wedge L_1) \to (L_3 \wedge L_4), (L_2 \wedge L_2) \to (L_3 \wedge L_4)$ } $\vDash$ { $(L_3 \wedge L_4)$ }.
 
-9. *Bottom Elimination*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2) \to (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1 \wedge L_1) \to (L_2^c \wedge L_2^c), (L_2 \wedge L_2) \to (L_1^c \wedge L_1^c)$ } or { $(L_1^c \wedge L_2^c)$ }.
+9. *Bottom Elimination*. { $(L_1 \wedge L_2) \to (L_3 \wedge L_4), (L_1 \wedge L_2) \to (L_3^c \wedge L_4^c)$ } $\vDash$ { $(L_1 \wedge L_1) \to (L_2^c \wedge L_2^c), (L_2 \wedge L_2) \to (L_1^c \wedge L_1^c)$ } and { $(L_1^c \wedge L_2^c)$ } iff $L_1 = L_2$.
 
-10. *Negation Elimination*. { $(L_1 \wedge L_2), (L_1^c \wedge L_2^c)$ } $\vDash$ { $\bot$ }.
+10. *Negation Elimination*. { $(L_1 \wedge L_2), (L_1^c \wedge L_2^c)$ } $\vDash$ {$\bot$}.
 
 Since the procedure guarantees to produce the semantic consequences of any set of sentences of $W$ that has at most three sentences in the sequence, if there is no interpretation where $(L_1 \wedge L_2)$ is true and $(L_3 \wedge L_4)$ is false, then $\vDash (L_1 \wedge L_2) \to (L_3 \wedge L_4)$. Hence any subproof can be simulated. By Lemma 1, every semantic consequence of $\Gamma_0$ can be obtained by a finite sequence of steps in which each step uses at most three sentences and, as enumerated above, each corresponding inference rules uses at most three sentences. Therefore if $\Gamma_0 \vDash \varphi$ and $\varphi$ is a sentence of $W$, then $\varphi \in \Gamma^*$.
 
