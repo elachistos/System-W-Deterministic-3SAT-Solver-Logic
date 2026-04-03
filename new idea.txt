@@ -2,3 +2,5 @@ new idea
 
 
 Start with your base formula and run bounded-width resolution to derive all consequences expressible within the width bound. Then introduce Tseitin variables for conjunctions appearing in the derived clause set, lifting them to single literals. Re-run bounded-width resolution over this enriched variable set the same width bound now reaches twice as deep into the original structure because each Tseitin variable already encodes a conjunction. Repeat, each round lifting the previous round's Tseitin variables. Halt when contradiction is derived. essentially same thing regarding W. But more beautiful and simplier.
+
+This can be done in W and W*. In W* this will be rather efficient. Very efficient in theory.
